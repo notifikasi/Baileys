@@ -53,6 +53,10 @@ export type BaileysEventMap = {
     'blocklist.set': { blocklist: string[] }
     'blocklist.update': { blocklist: string[], type: 'add' | 'remove' }
     /** Receive an update on a call, including when the call was received, rejected, accepted */
+
+    'msg.retry': { msgId: string, retryCount: number }
+    'msg.failed': { msgId: string, retryCount: number }
+
     'call': WACallEvent[]
 }
 

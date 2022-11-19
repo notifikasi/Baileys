@@ -93,11 +93,13 @@ export const makeMessagesRecvSocket = (config: SocketConfig) => {
 		let retryCount = msgRetryMap[msgId] || 0
 		if(retryCount >= 5) {
 			logger.debug({ retryCount, msgId }, 'reached retry limit, clearing')
+			ev.emit('msg.retryfailed', { msgId, retryCount })
 			delete msgRetryMap[msgId]
 			return
 		}
 
 		retryCount += 1
+		ev.emit('msg.retry', { msgId, retryCount })
 		msgRetryMap[msgId] = retryCount
 
 		const { account, signedPreKey, signedIdentityKey: identityKey } = authState.creds
