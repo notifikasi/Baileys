@@ -93,7 +93,7 @@ export const makeMessagesRecvSocket = (config: SocketConfig) => {
 		let retryCount = msgRetryMap[msgId] || 0
 		if(retryCount >= 5) {
 			logger.debug({ retryCount, msgId }, 'reached retry limit, clearing')
-			ev.emit('msg.retryfailed', { msgId, retryCount })
+			ev.emit('msg.failed', { msgId, retryCount })
 			delete msgRetryMap[msgId]
 			return
 		}
