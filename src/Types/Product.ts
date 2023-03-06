@@ -2,7 +2,7 @@ import { WAMediaUpload } from './Message'
 
 export type CatalogResult = {
 	data: {
-		paging: { cursors: { before: string, after: string } },
+		paging: { cursors: { before: string, after: string } }
 		data: any[]
 	}
 }
@@ -70,4 +70,15 @@ export type OrderProduct = {
 export type OrderDetails = {
 	price: OrderPrice
 	products: OrderProduct[]
+}
+
+export type CatalogCursor = string
+
+export type GetCatalogOptions = {
+	/** cursor to start from */
+	cursor?: CatalogCursor
+	/** number of products to fetch */
+	limit?: number
+
+	jid?: string
 }
